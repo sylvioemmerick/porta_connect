@@ -1,0 +1,21 @@
+name: Deploy Producao (main)
+
+on:
+  push:
+    branches: ["main"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy Locaweb (production)
+        uses: locaweb/ftp-deploy@1.0.0
+        with:
+          host: ${{ secrets.HOST_PROD }}
+          user: ${{ secrets.USER_PROD }}
+          password: ${{ secrets.PASS_PROD }}
+          localDir: "."
+          remoteDir: "/public_html/app"
