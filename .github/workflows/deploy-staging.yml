@@ -1,0 +1,21 @@
+name: Deploy Homologacao (staging)
+
+on:
+  push:
+    branches: ["staging"]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy Locaweb (staging)
+        uses: locaweb/ftp-deploy@1.0.0
+        with:
+          host: ${{ secrets.HOST_STAGE }}
+          user: ${{ secrets.USER_STAGE }}
+          password: ${{ secrets.PASS_STAGE }}
+          localDir: "."
+          remoteDir: "/public_html/testapp"
