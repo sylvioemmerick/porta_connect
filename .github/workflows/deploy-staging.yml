@@ -28,3 +28,4 @@ jobs:
           password: ${{ secrets.PASS_STAGE }}
           localDir: "."
           remoteDir: "/public_html/testapp"
+          options: "--exclude-glob .env --exclude-glob .env.*"
